@@ -7,3 +7,10 @@ request({ url:url, json:true }, (erorr, response) => {
         response.body.main.temp + 'Cº' +
         '\nAnd it feels like ' + response.body.main.feels_like + 'Cº')
 })
+
+const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/s%C3%A3o%20paulo.json?types=place&access_token=pk.eyJ1Ijoib2d1c3Rhdm8tc2lsdmEiLCJhIjoiY2w0NGJkd3IyMG1seDNpbGx6dGZ3ZG5taCJ9.pkXxfk0tmpu7UJ8ztnCyOA'
+request({ url:geocodeURL, json:true }, (error, response) => {
+    const latitude = response.body.features[0].center[0]
+    const longitude = response.body.features[0].center[1]
+    console.log(latitude, longitude)
+})
