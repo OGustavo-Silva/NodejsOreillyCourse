@@ -1,10 +1,17 @@
 const path = require('path')
 const express = require('express')
+const hbs = require('hbs')
 
 const app = express()
 const publicDirectoryPath = path.join(__dirname, '../public')
 
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
 app.set('view engine', 'hbs')//setup handlebars | npm i hbs@4.0.1
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+
+//setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
 app.get('', (req, res) => {
@@ -16,13 +23,16 @@ app.get('', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About page'
+        title: 'About page',
+        name: 'Gustavo'
     })
 })
 
 app.get('/help', (req, res) => {
-    res.render('about', {
-        helpText: 'Help page'
+    res.render('help', {
+        helpText: 'Help page',
+        title: 'Help',
+        name: 'Gustavo'
     })
 })
 
